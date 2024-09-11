@@ -18,6 +18,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { EmailSignIn } from "@/server/action/EmailSignIn";
+import { useAction } from "next-safe-action/hooks";
 
 export default function LoginForm() {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -28,9 +30,17 @@ export default function LoginForm() {
     },
   });
 
+  const { execute, status } = useAction(EmailSignIn, {
+    onSuccess(data) {
+      // if (data?.error) setError(data.error);
+      // if (data?.success) setSuccess(data.success);
+      // if (data.twoFactor) setShowTwoFactor(true);
+    },
+  });
+
   const onSubmitForm = (value: z.infer<typeof LoginSchema>) => {
-    console.log(value);
-    // execute(value);
+    // console.log(value);
+    execute(value);
   };
   return (
     <AuthCard

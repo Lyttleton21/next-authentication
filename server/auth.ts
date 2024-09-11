@@ -3,9 +3,13 @@ import { DrizzleAdapter } from "@auth/drizzle-adapter"
 import { db } from "@/server"
 import google from "next-auth/providers/google";
 import github from "next-auth/providers/github"
+import { accounts, users } from "./schema";
  
 export const { handlers, auth, signIn, signOut } = NextAuth({
-    adapter: DrizzleAdapter(db),
+    adapter: DrizzleAdapter(db, {
+        usersTable: users,
+        accountsTable: accounts
+      }),
     secret: process.env.AUTH_SECRET,
     session: {strategy:"jwt"},
     providers: [

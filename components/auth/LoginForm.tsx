@@ -20,8 +20,16 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { EmailSignIn } from "@/server/action/EmailSignIn";
 import { useAction } from "next-safe-action/hooks";
+import { error } from "console";
+import FormError from "./form-error";
+import FormSuccess from "./form-success";
+import { useState } from "react";
 
 export default function LoginForm() {
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
+  const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -32,8 +40,8 @@ export default function LoginForm() {
 
   const { execute, status } = useAction(EmailSignIn, {
     onSuccess(data) {
-      // if (data?.error) setError(data.error);
-      // if (data?.success) setSuccess(data.success);
+      if (data?.error) setError(data.error);
+      if (data?.Success) setSuccess(data.Success);
       // if (data.twoFactor) setShowTwoFactor(true);
     },
   });
@@ -87,6 +95,8 @@ export default function LoginForm() {
                 )}
               />
             </>
+            <FormSuccess message={success} />
+            <FormError message={error} />
             <Button asChild variant={"link"} size={"sm"}>
               <Link href={"/auth/reset"}>Forget Password?</Link>
             </Button>

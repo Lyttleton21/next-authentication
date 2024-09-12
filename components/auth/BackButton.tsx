@@ -10,7 +10,7 @@ interface Props {
 
 export default function BackButton({ href, label }: Props) {
   return (
-    <Button variant={"default"} asChild className="w-full font-medium">
+    <Button variant={"link"} asChild className="w-full font-medium">
       <Link aria-label={label} href={href}>
         {label}
       </Link>

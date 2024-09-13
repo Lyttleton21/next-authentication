@@ -1,5 +1,6 @@
 'use server'
 
+import { SendPasswordResetEmailTemplate } from "@/components/email/SendPasswordResetEmailTemplate";
 import { VerificationTokenEmailTemplate } from "@/components/email/VerificatioTokenEmailTemplate";
 import getBaseURL from "@/lib/base-url"
 import {Resend} from "resend";
@@ -22,3 +23,15 @@ export const sendVerificationEmail = async (email:string, token:string, name:str
         console.log(error);
     }
 }
+
+export const SendPasswordResetEmail = async (email:string, token:string, name:string | null) => {
+    const confirmLink = `${domain}/auth/new-password?token=${token}`;
+    const {data, error} = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: email,
+      subject: "Password Reset Email",
+      react: SendPasswordResetEmailTemplate({name, confirmLink})
+    });
+    if(data) return data;
+    if(error) return error;
+}   

@@ -22,6 +22,13 @@
       "when": 1726167066080,
       "tag": "0002_melted_penance",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1726228786184,
+      "tag": "0003_lazy_joshua_kane",
+      "breakpoints": true
     }
   ]
 }

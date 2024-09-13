@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { EmailSignIn } from "@/server/action/EmailSignIn";
+import { EmailSignIn } from "@/server/action/auth/EmailSignIn";
 import { useAction } from "next-safe-action/hooks";
 import FormError from "./form-error";
 import FormSuccess from "./form-success";

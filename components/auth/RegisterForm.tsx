@@ -1,6 +1,6 @@
 "use client";
 
-import { EmailRegister } from "@/server/action/EmailRegister";
+import { EmailRegister } from "@/server/action/auth/EmailRegister";
 import RegisterSchema from "@/types/register-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";

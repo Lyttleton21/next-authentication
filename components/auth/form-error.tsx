@@ -10,7 +10,7 @@ const FormError = ({ message }: Props) => {
   return (
     <div className="bg-destructive flex text-xs font-medium my-2 items-center gap-2 text-secondary-foreground p-3 rounded-md">
       <AlertCircle className="w-4 h-4" />
-      <p>{message}</p>
+      <p>{message} 🎉</p>
     </div>
   );
 };

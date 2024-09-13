@@ -2,12 +2,12 @@
 
 import LoginSchema from '@/types/login-schema';
 import {createSafeActionClient} from 'next-safe-action'
-import { db } from '..';
+import { db } from '../..';
 import { eq } from 'drizzle-orm';
-import { users } from '../schema';
-import { generateEmailVerificationToken } from './tokens';
-import { sendVerificationEmail } from './email';
-import { signIn } from '../auth';
+import { users } from '../../schema';
+import { generateEmailVerificationToken } from '../tokens';
+import { sendVerificationEmail } from '../email';
+import { signIn } from '../../auth';
 import { AuthError } from 'next-auth';
 
 const action = createSafeActionClient();

@@ -1,13 +1,13 @@
 'use server'
 
 import {createSafeActionClient} from 'next-safe-action'
-import { db } from '..';
+import { db } from '../..';
 import RegisterSchema from '@/types/register-schema';
 import bcrypt from 'bcrypt'
 import { eq } from 'drizzle-orm';
-import { users } from '../schema';
-import { generateEmailVerificationToken } from './tokens';
-import { sendVerificationEmail } from './email';
+import { users } from '../../schema';
+import { generateEmailVerificationToken } from '../tokens';
+import { sendVerificationEmail } from '../email';
 
 const action = createSafeActionClient();
 

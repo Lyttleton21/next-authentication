@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt'
 import { eq } from 'drizzle-orm';
 import { users } from '../schema';
 import { generateEmailVerificationToken } from './tokens';
+import { sendVerificationEmail } from './email';
 
 const action = createSafeActionClient();
 
@@ -20,31 +21,35 @@ export const EmailRegister = action(RegisterSchema, async({email, password, name
             where: eq(users.email, email)
         });
 
+        // if User Already exists
         if(existingUser){
             if(!existingUser.emailVerified){
-                // await sendVerificationEmail(
-                //     verificationToken[0].email,
-                //     verificationToken[0].token
-                // )
+                    await sendVerificationEmail(
+                        verificationToken![0].email,
+                        verificationToken![0].token,
+                        name
+                    )
                 return {success: "Email Comfirmation Reset"}
             }
+            // if User Already exists and Email is Verified
             return {error: "User Already exists"}
         }
-        if(!existingUser){
+
+        // Create a new user account
             await db.insert(users).values({
                 email,
                 name,
                 password: hashedPassword
             });
-            // await sendVerificationEmail(
-            //     verificationToken[0].email,
-            //     verificationToken[0].token
-            // );
+                console.log("Verification Token Email",verificationToken![0].email);
+                
+                await sendVerificationEmail(
+                    verificationToken![0].email,
+                    verificationToken![0].token,
+                    name
+                );
             return { success: "Confirmation Email Sent!" }
-        }
-
-        // return {success: "Email Comfirmation Sent"}
     }catch (error){
-        console.log("During EmailRegistering", error);
+        console.log("During Email Registering!", error);
     }
 });

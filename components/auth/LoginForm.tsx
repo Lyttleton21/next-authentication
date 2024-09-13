@@ -51,7 +51,7 @@ export default function LoginForm() {
   };
   return (
     <AuthCard
-      cardTitle={"Welcome Back!"}
+      cardTitle={"Welcome Back 🎉"}
       backButtonhref={"/auth/register"}
       backButtonLabel={"Create a New Account"}
       showSocial

@@ -51,7 +51,7 @@ export default function RegisterForm() {
   return (
     <AuthCard
       showSocial
-      cardTitle={"Create an Account!"}
+      cardTitle={"Create Account 🎉"}
       backButtonhref={"/auth/login"}
       backButtonLabel={"Already have an Account? Login here"}
     >

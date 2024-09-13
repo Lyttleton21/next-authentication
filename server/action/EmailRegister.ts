@@ -29,7 +29,7 @@ export const EmailRegister = action(RegisterSchema, async({email, password, name
                         verificationToken![0].token,
                         name
                     )
-                return {success: "Email Comfirmation Reset"}
+                return {success: "Email Comfirmation Resent!"}
             }
             // if User Already exists and Email is Verified
             return {error: "User Already exists"}
